@@ -118,11 +118,34 @@ android {
         }
     }
     buildTypes {
+    
+     debug {
+
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    
+     flavorDimensions "environment"
+    productFlavors {
+        dev {
+            // Pre-compile run ENVFILE=.env.dev
+            applicationIdSuffix ".dev"
+            dimension "environment"
+        }
+        staging {
+            // Pre-compile run ENVFILE=.env.staging
+            applicationIdSuffix ".staging"
+            dimension "environment"
+        }
+        prod {
+            // Pre-compile run ENVFILE=.env.prod
+            dimension "environment"
+        }
+    }
+    
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
